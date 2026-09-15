@@ -77,6 +77,7 @@ def _fetch_in_subprocess(
                 date=scan_date_iso,
                 from_airport=origin,
                 to_airport=destination,
+                max_stops=0,
             ),
         ]
         if return_date_iso:
@@ -85,6 +86,7 @@ def _fetch_in_subprocess(
                     date=return_date_iso,
                     from_airport=destination,
                     to_airport=origin,
+                    max_stops=0,
                 ),
             )
 
