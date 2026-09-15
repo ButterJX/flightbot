@@ -121,12 +121,25 @@ def _format_message(result: PriceResult, is_price_drop: bool = False) -> str:
     header_emoji = "📉" if is_price_drop else "🔥"
     header_text = "BAJÓ MÁS" if is_price_drop else "ALERTA DE PRECIO"
 
-    lines = [
-        f"{header_emoji} <b>{header_text} — {result.origin} → {result.destination}</b>",
-        "",
-        f"💰 <b>{result.display_price}</b> ({result.airline})",
-        f"📅 {result.date}",
-    ]
+# Approximate USD → CAD conversion.
+# Update this rate occasionally if you want the CAD estimate to stay close.
+usd_to_cad = 1.39
+
+if result.currency == "USD":
+    cad_price = result.price * usd_to_cad
+    price_line = (
+        f"💰 <b>{result.display_price}</b> "
+        f"(≈ CAD ${cad_price:,.0f}) — {result.airline}"
+    )
+else:
+    price_line = f"💰 <b>{result.display_price}</b> — {result.airline}"
+
+lines = [
+    f"{header_emoji} <b>{header_text} — {result.origin} → {result.destination}</b>",
+    "",
+    price_line,
+    f"📅 {result.date}",
+]
 
     # Escalas
     stops_text = "Directo" if result.stops == 0 else f"{result.stops} escala(s)"
