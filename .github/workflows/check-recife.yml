@@ -1,9 +1,9 @@
-name: Check Recife (BA→REC)
+name: Check YYZ → China Flights
 
 on:
   schedule:
-    # Cada 12h: 06:00 y 18:00 UTC (03:00 y 15:00 Argentina)
-    - cron: '0 6,18 * * *'
+  # Every 6 hours
+  - cron: '0 */6 * * *'
 
   workflow_dispatch:
 
