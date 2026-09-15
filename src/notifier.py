@@ -111,66 +111,57 @@ def print_alert(result: PriceResult, is_price_drop: bool = False) -> None:
         print(clean)
         print(f"{'='*50}\n")
 
-
 def _format_message(result: PriceResult, is_price_drop: bool = False) -> str:
-    """Format a PriceResult into a Telegram message.
+    """Format a PriceResult into a Telegram message."""
 
-    Crea un mensaje bonito con emojis y formato HTML para Telegram.
-    """
-    # Emoji según si es primera alerta o bajada de precio
     header_emoji = "📉" if is_price_drop else "🔥"
-    header_text = "BAJÓ MÁS" if is_price_drop else "ALERTA DE PRECIO"
+    header_text = "PRICE DROPPED" if is_price_drop else "FLIGHT PRICE ALERT"
 
-# Approximate USD → CAD conversion.
-# Update this rate occasionally if you want the CAD estimate to stay close.
-usd_to_cad = 1.39
+    # Approximate USD to CAD conversion for display only
+    usd_to_cad = 1.39
 
-if result.currency == "USD":
-    cad_price = result.price * usd_to_cad
-    price_line = (
-        f"💰 <b>{result.display_price}</b> "
-        f"(≈ CAD ${cad_price:,.0f}) — {result.airline}"
-    )
-else:
-    price_line = f"💰 <b>{result.display_price}</b> — {result.airline}"
+    if result.currency == "USD":
+        cad_price = result.price * usd_to_cad
+        price_line = (
+            f"💰 <b>{result.display_price}</b> "
+            f"(≈ CAD ${cad_price:,.0f}) — {result.airline}"
+        )
+    else:
+        price_line = f"💰 <b>{result.display_price}</b> — {result.airline}"
 
-lines = [
-    f"{header_emoji} <b>{header_text} — {result.origin} → {result.destination}</b>",
-    "",
-    price_line,
-    f"📅 {result.date}",
-]
+    lines = [
+        f"{header_emoji} <b>{header_text} — {result.origin} → {result.destination}</b>",
+        "",
+        price_line,
+        f"📅 {result.date}",
+    ]
 
-    # Escalas
-    stops_text = "Directo" if result.stops == 0 else f"{result.stops} escala(s)"
+    # Stops
+    stops_text = "NONSTOP" if result.stops == 0 else f"{result.stops} stop(s)"
     lines.append(f"✈️ {stops_text}")
 
-    # Número de vuelo (si está disponible)
+    # Flight number
     if result.flight_number:
-        lines.append(f"🔢 Vuelo: {result.flight_number}")
+        lines.append(f"🔢 Flight: {result.flight_number}")
 
-    # Asientos restantes (solo Sky)
+    # Seats remaining
     if result.seats_remaining is not None:
-        urgency = "⚡" if result.seats_remaining <= 3 else "🪑"
-        lines.append(f"{urgency} {result.seats_remaining} asientos restantes")
+        lines.append(f"🪑 {result.seats_remaining} seats remaining")
 
-    # Duración (si está disponible)
+    # Duration
     if result.duration_minutes:
         hours = result.duration_minutes // 60
         minutes = result.duration_minutes % 60
         lines.append(f"⏱️ {hours}h {minutes}m")
 
-    # Tags especiales de Level
-    if "IsMinimumPriceMonth" in result.tags:
-        lines.append("🏷️ <i>Precio más bajo del mes</i>")
-
     lines.extend([
         "",
-        f"📊 Fuente: {result.source}",
+        f"📊 Source: {result.source}",
         f"⏰ {result.fetched_at[:19]} UTC",
     ])
 
     return "\n".join(lines)
+
 
 
 def _escape_html(text: str) -> str:
