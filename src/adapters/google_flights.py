@@ -119,7 +119,7 @@ class GoogleFlightsAdapter(BaseAdapter):
         self._available = True  # Se pone en False si fast-flights no está instalado
         self._consecutive_failures = 0
         # Máximo de fallos consecutivos antes de abortar esta ruta
-        self._max_consecutive_failures = 20
+        self._max_consecutive_failures = 50
 
     @property
     def source_name(self) -> str:
