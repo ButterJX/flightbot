@@ -19,26 +19,6 @@
       "depart_to": "2026-10-08",
       "scan_step_days": 1,
       "trip_type": "round_trip"
-    },
-    {
-      "origin": "YYZ",
-      "destination": "SZX",
-      "sources": ["google_flights"],
-      "threshold_usd": 1150,
-      "depart_from": "2026-10-07",
-      "depart_to": "2026-10-08",
-      "scan_step_days": 1,
-      "trip_type": "round_trip"
-    },
-    {
-      "origin": "YYZ",
-      "destination": "HKG",
-      "sources": ["google_flights"],
-      "threshold_usd": 1150,
-      "depart_from": "2026-10-07",
-      "depart_to": "2026-10-08",
-      "scan_step_days": 1,
-      "trip_type": "round_trip"
     }
   ],
   "settings": {
