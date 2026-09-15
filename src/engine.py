@@ -24,7 +24,7 @@ from src.state import AlertStateManager
 logger = logging.getLogger(__name__)
 
 # Límite de rutas procesadas en paralelo (evita rate-limiting de Google)
-MAX_CONCURRENT_ROUTES = 2
+MAX_CONCURRENT_ROUTES = 1
 
 
 async def run(
