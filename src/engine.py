@@ -109,6 +109,40 @@ async def run(
 
     logger.info("Total de precios recolectados: %d", len(all_results))
 
+    # Show cheapest result found for every monitored route
+    for route in routes:
+        route_results = [
+            r for r in all_results
+            if r.origin == route.origin
+            and r.destination == route.destination
+            and r.price > 0
+        ]
+
+        if route_results:
+            cheapest = min(route_results, key=lambda r: r.price)
+
+            stop_text = (
+                "NONSTOP"
+                if cheapest.stops == 0
+                else f"{cheapest.stops} stop(s)"
+            )
+
+            logger.info(
+                "CHEAPEST %s → %s: %s | %s | %s | %s",
+                cheapest.origin,
+                cheapest.destination,
+                cheapest.display_price,
+                cheapest.airline,
+                cheapest.date,
+                stop_text,
+            )
+        else:
+            logger.info(
+                "CHEAPEST %s → %s: no usable fares found",
+                route.origin,
+                route.destination,
+            )
+
     # === Paso 1b: Corrida vacía = falla, nunca silencio ===
     # 0 precios con rutas configuradas no es un resultado válido: avisar por
     # Telegram para que la rotura del scraper no pase desapercibida semanas.
