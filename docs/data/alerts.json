@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-28T13:20:31.781087+00:00",
+  "last_updated": "2026-09-28T23:11:17.936967+00:00",
   "alerts": [
     {
       "source": "google_flights",
@@ -34994,6 +34994,32 @@
       "currency": "USD",
       "stops": 0,
       "fetched_at": "2026-09-28T13:13:48.479792+00:00",
+      "route_key": "YYZ-PVG-2026-10-27 → 2026-11-12",
+      "is_price_drop": false
+    },
+    {
+      "source": "google_flights",
+      "airline": "Air Canada",
+      "origin": "YYZ",
+      "destination": "PVG",
+      "date": "2026-10-27 → 2026-11-11",
+      "price": 1283.0,
+      "currency": "USD",
+      "stops": 0,
+      "fetched_at": "2026-09-28T23:04:32.838240+00:00",
+      "route_key": "YYZ-PVG-2026-10-27 → 2026-11-11",
+      "is_price_drop": false
+    },
+    {
+      "source": "google_flights",
+      "airline": "Air Canada",
+      "origin": "YYZ",
+      "destination": "PVG",
+      "date": "2026-10-27 → 2026-11-12",
+      "price": 1283.0,
+      "currency": "USD",
+      "stops": 0,
+      "fetched_at": "2026-09-28T23:04:36.230286+00:00",
       "route_key": "YYZ-PVG-2026-10-27 → 2026-11-12",
       "is_price_drop": false
     }
